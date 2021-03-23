@@ -1,0 +1,156 @@
+\documentclass{article}
+
+\usepackage[margin=4cm]{geometry}
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+\usepackage{fontspec}
+    \setsansfont{Linux Biolinum O}
+\usepackage{polyglossia}
+    \setmainlanguage{english}
+\usepackage{sectsty}
+    \sectionfont{\normalfont\sffamily\bfseries\color{blue!40!black}}
+    \subsectionfont{\normalfont\sffamily\bfseries\color{blue!30!black}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+    \lstset{language=Python,
+	basicstyle=\footnotesize\ttfamily,
+	breaklines=true,
+	framextopmargin=50pt,
+	frame=bottomline,
+	backgroundcolor=\color{white!86!black},
+	commentstyle=\color{blue},
+	keywordstyle=\color{red},
+	stringstyle=\color{orange!80!black}}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\title{\textsf{\color{blue!40!black}Particle Physics - Exercise Sheet 05}}
+\author{Maurice Donner \and Jan Hubrich}
+
+\begin{document}
+\maketitle
+
+\section{Polarized beams}
+
+\textbf{a)} Since we are at high energies, we can assume that \( E \gg m \).\\
+The chiral nature of QED states, that only two of the four helicity combinations
+lead to a non-zero 4-vector current. The initial and final state vector currents
+are
+\begin{align}
+    \nonumber e ^{-} &: \theta = \varphi = 0 \quad 
+    \nonumber e ^{+} : \theta = \varphi = \pi \\
+    \nonumber j _{(e ) , \text{RL}} &= 2 E \left( 0, -1, i , 0 \right) \\
+    \nonumber j _{(e) , \text{RR}} &= ( 0, 0, 0, 0) \\
+    \nonumber j _{(e) , \text{LL}} &= ( 0, 0, 0, 0) \\
+    \nonumber j _{(e ) , \text{LR}} &= 2 E \left( 0, -1, -i , 0 \right) \\
+    \nonumber \mu ^{-} &: \theta , \varphi = 0 \quad 
+    \nonumber \mu ^{+} : \theta - \pi , \varphi = \pi \\
+    \nonumber j _{(\mu ) , \text{RL}} &= 2 E \left( 0, - \cos \left( \theta \right)
+    \nonumber , i , \sin \left( \theta \right) \right) \\
+    \nonumber j _{(\mu) , \text{RR}} &= ( 0, 0, 0, 0) \\
+    \nonumber j _{(\mu) , \text{LL}} &= ( 0, 0, 0, 0) \\
+    j _{(\mu) , \text{LR}} &= 2 E \left( 0, - \cos \left( \theta \right)
+    , -i , \sin \left( \theta \right) \right) 
+\end{align}
+which lead to the non-zero matrix elements
+\begin{align}
+    \left| M _{\text{RL} \rightarrow \text{RL}} \right|
+    &= - \frac{e^2}{q^2} \ j _{e , \text{RL}} \ g _{\mu \nu} \
+    j _{\mu , \text{RL}} =
+    e^4 \left[ 1 + \cos \left( \theta \right) \right] \\
+    \left| M _{\text{RL} \rightarrow \text{LR}} \right|
+    &= - \frac{e^2}{q^2} \ j _{e , \text{RL}} \ g _{\mu \nu} \
+    j _{\mu , \text{LR}} =
+    e^4 \left[ 1 - \cos \left( \theta \right) \right] \\
+    \left| M _{\text{LR} \rightarrow \text{RL}} \right|
+    &= - \frac{e^2}{q^2} \ j _{e , \text{LR}} \ g _{\mu \nu} \
+    j _{\mu , \text{RL}} =
+    e^4 \left[ 1 - \cos \left( \theta \right) \right] \\
+    \left| M _{\text{LR} \rightarrow \text{LR}} \right|
+    &= - \frac{e^2}{q^2} \ j _{e , \text{LR}} \ g _{\mu \nu} \
+    j _{\mu , \text{LR}} =
+    e^4 \left[ 1 + \cos \left( \theta \right) \right]
+\end{align}
+Lastly, we will use the formula for the total cross section to compare
+production rates
+\begin{align}
+    \label{eq:CS}
+    \frac{d \sigma}{d \Omega} = \frac{1}{64 \pi ^2 s} \frac{p ^{*}_f}{p ^{*}_{i}}
+    \int \left| M _{fi} \right| d \Omega
+\end{align}
+\begin{itemize}
+    \item If both beams are unpolarized, we have to consider all possible
+	initial to final state configurations
+	\begin{align}
+	\langle \left| M _{fi} \right| \rangle &=
+	\frac{1}{4} \left(
+	\left| M _{\text{RL} \rightarrow \text{RL}} \right| ^2 +
+	\left| M _{\text{RL} \rightarrow \text{LR}} \right| ^2 +
+	\left| M _{\text{LR} \rightarrow \text{RL}} \right| ^2 +
+	\left| M _{\text{LR} \rightarrow \text{LR}} \right| ^2
+	\right)
+    \end{align}
+Plugging into (\ref{eq:CS}) yields the known cross section for the annihilation
+process
+\begin{align}
+    \sigma = \frac{4 \pi \alpha ^{2} }{3s}
+\end{align}
+    \item If the electron beam has left-handed polarization, one of the two
+	allowed initial state is not possible. Therefore there are only
+	two possible states in total, so we only need to average over two
+	states this time
+	\begin{align}
+	\langle \left| M _{fi} \right| \rangle &=
+	\frac{1}{\color{red}{2}} \left(
+	\left| M _{\text{LR} \rightarrow \text{RL}} \right| ^2 +
+	\left| M _{\text{LR} \rightarrow \text{LR}} \right| ^2
+	\right)
+	\end{align}
+	The total cross section is the same as for an unpolarized beam:
+	\( \sigma = 4 \pi \alpha ^{2} / 3 s \)
+    \item If the electron beam is left-handed and the positron beam is
+	right handed, there is only one possible initial state. However,
+	there are two possible final states:	
+	\begin{align}
+	\langle \left| M _{fi} \right| \rangle &=
+	\frac{1}{\color{red}{1}} \left(
+	\left| M _{\text{LR} \rightarrow \text{RL}} \right| ^2 +
+	\left| M _{\text{LR} \rightarrow \text{LR}} \right| ^2
+	\right)
+	\end{align}
+	Hence the total cross section yields \( 8 \pi \alpha ^2 / 3s \) and is
+	a facter two larger than for the unpolarized beam.
+    \item Having both the electron and the positron beam polarized into
+	the same direction, yields an initial state that is forbidden
+	\begin{align}
+	    \left| M _{\text{LL}} \right| = 
+	    \underbrace{\left| M _{\text{LL}\rightarrow \text{LL}} \right|}_{=0} + 
+	    \underbrace{\left| M _{\text{LL}\rightarrow \text{LR}} \right|}_{=0} + 
+	    \underbrace{\left| M _{\text{LL}\rightarrow \text{RL}} \right|}_{=0} + 
+	    \underbrace{\left| M _{\text{LL}\rightarrow \text{RR}} \right|}_{=0}  
+	    = 0
+	\end{align}
+	Therefore the cross section of the matrix element \( \left| M _{fi} 
+	    \right| \) is also equal to zero. No production is observed.
+\end{itemize}
+\textbf{b)} To calculate the fraction of right- to left-handed \( \mu ^{-} \),
+we look exemplary at the integral over the single matrix elements
+\begin{align}
+    \nonumber \int \left| M _{\text{LR} \rightarrow \text{LR}} \right|^2 =
+    \int_{-1}^{1} e ^{4} \left( 1+ \cos \left( \theta \right) ^2\right)
+    d \left( \cos \theta \right) = \frac{8}{3} \\
+    \int \left| M _{\text{LR} \rightarrow \text{RL}} \right|^2 =
+    \int_{-1}^{1} e ^{4} \left( 1- \cos \left( \theta \right) ^2\right)
+    d \left( \cos \theta \right) = \frac{8}{3} \\
+\end{align}
+The fraction of \( \mu ^{-} _{\downarrow} \) and \( \mu ^{-} _{\uparrow} \)
+is therefore equal to 1.
+
+\end{document}

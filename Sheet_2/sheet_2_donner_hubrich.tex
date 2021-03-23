@@ -1,0 +1,133 @@
+\documentclass{article}
+
+\usepackage[margin=4cm]{geometry}
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+\usepackage{fontspec}
+    \setsansfont{Linux Biolinum O}
+\usepackage{polyglossia}
+    \setmainlanguage{english}
+\usepackage{sectsty}
+    \sectionfont{\normalfont\sffamily\bfseries\color{blue!40!black}}
+    \subsectionfont{\normalfont\sffamily\bfseries\color{blue!30!black}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+    \lstset{language=Python,
+	basicstyle=\footnotesize\ttfamily,
+	breaklines=true,
+	framextopmargin=50pt,
+	frame=bottomline,
+	backgroundcolor=\color{white!86!black},
+	commentstyle=\color{blue},
+	keywordstyle=\color{red},
+	stringstyle=\color{orange!80!black}}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\title{\textsf{\color{blue!40!black}Particle Physics - Exercise Sheet 02}}
+\author{Maurice Donner \and Jan Hubrich}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Neutrinos in matter}
+The mean free path is described by
+\begin{align}
+    \lambda = \frac{1}{\sigma n}
+\end{align}
+Where \( n \) is the target density of a material. Using \( \sigma =
+8 \cdot 10 ^{-39} \ \si{\centi \meter ^2}\) and \( n = \rho N_A/A \), where
+\( N_A = 6.022 \cdot 10 ^{23}\) is the Avogadro constant, \( \rho = 
+7.9 \cdot 101 ^{3} \ \si{\kilo \gram \per \meter ^3}\), the density of iron
+and \( A = 56 \) its atomic number, we get
+\begin{align}
+    \lambda = \frac{1}{\sigma n} = \frac{A}{\sigma \rho N_A} = 1.471
+    \cdot 10 ^{12} \ \si{\meter}
+\end{align}
+This means, that the neutrino experience one interaction after a distance
+of \( \lambda \), which means the probability of interaction in \( l = 2m \) of
+iron is \( 1.36 \cdot 10 ^{-12} \). 
+
+
+\section{Phase space integration}
+The interaction cross section \( \sigma \) for a scattering process
+\( a+b \rightarrow 1+2 \) can be described by 
+\begin{align}
+    \label{eq:sig}
+    \sigma = \frac{1}{(2 \pi ^2 )} \frac{1}{4 p_i^{*} \sqrt{s}} \int
+    \left| M_{fi} \right|^2 \delta ( \sqrt{s} -E_1 - E_2 )
+    \delta ^3 ( \vec p_1+\vec p_2 ) \frac{\vec p_1}{2 E_1} \frac{\vec p_2}{2 E_2}
+\end{align}
+First, we use
+\begin{align}
+    \delta(f(x)) &= \left| \frac{df}{dx} \right| ^{-1} _{x=x_0} \ \text{with}\ f(x_0) = 0 \\
+    \text{and} \ E_1 &= \sqrt{m_1^2+p_1^2} \ \text{and}\ E_2 = \sqrt{m _{2} ^{2} +p _{2}^{2} }
+\end{align}
+to rewrite the first delta term and evaluate it for \( p_2 = -p_1 \):
+\begin{align}
+    \delta \left( \sqrt{s} - E_1 - E_2 \right) &= \nonumber
+    \delta \left( \sqrt{s} - \sqrt{m _{1}^2 + p_1^2 } - \sqrt{m _{2} ^{2} + p _{2} ^2} \right) \\
+    &= \left| - \frac{2 p_1}{2 \sqrt{m_1^2 +p_1^2}} - \frac{2 p_1}{2 \sqrt{m_2^2 +p_1^2}} \nonumber
+    \right| ^{-1} \\
+    &= \left( \frac{p_1}{E_1} + \frac{p_1}{E_2} \right) ^{-1}
+    = \left(\frac{ p_1E_2+p_1E_1}{E_1E_2} \right)^{-1} \nonumber
+    \\ &= \frac{E_1 E_2}{p_1 \sqrt{s}}
+    \label{eq:delta}
+\end{align}
+Now we transform (\ref{eq:sig}) into spherical coordinates and use (\ref{eq:delta})
+\begin{align}
+    \text{with} \ d^3 \vec{p_i} &= p_i^2 dp_i d \Omega \nonumber \\
+    \Rightarrow \sigma &= \frac{p_f^{*}}{16 \pi ^2 p_i^{*} \sqrt{s}} 
+    \frac{E_1E_2}{4 E_1E_2 \sqrt{s}} \int
+    \left| M_{fi} \right|^2 d \Omega^{*} \nonumber \\
+    &= \frac{p_f^{*}}{64 \pi ^2 p_i^{*} s} \int
+    \left| M_{fi} \right|^2 d \Omega^{*}
+\end{align}
+
+\section{Fermi's golden rule}
+\textbf{b)} The energy of the product particles has to match the rest mass of
+\( \eta \):
+\begin{align}
+    m_ \eta &= E_p + E _{\bar p} = 2 E_p \nonumber \\
+    \Rightarrow \frac{m_\eta^2}{4} &= m_p^2 + p_f^2 \quad
+    \Rightarrow \quad p_f = \left(\frac{m_\eta^2}{4} - m_p^2 \right) ^{\frac{1}{2}}
+\end{align}
+\textbf{c)} Fermi's golden rule states that
+\begin{align}
+\Gamma _{fi} = \frac{p_f^{*}}{32 \pi ^2 m_A*2} \int \left| M_{fi} \right| d \Omega^{*}
+\end{align}
+Assuming a similar matrix element, the ratio of the two decays is 
+\begin{align}
+    \frac{\Gamma _{\eta \rightarrow p + \bar p}}{\Gamma _{\eta \rightarrow \Lambda + \bar \Lambda}}
+	= \frac{\sqrt{m _{\eta}^2-4m_p^2} }{\sqrt{m _{\eta}^2-4m_\Lambda^2} }
+	= \frac{33.29 \ \si{\mega \electronvolt}}{27.46 \ \si{\mega \electronvolt}} = 1.17
+\end{align}
+The pdg databook suggests a ratio of 1.35, thus the matrix element of the proton
+decay has to be larger than the matrix element of the \( \Lambda \) decay. \\
+\textbf{d)} With \( \tau = 1/\Gamma \) we get \( \tau = 2.34 \cdot 10 ^{-23} \ \si{\second} \)
+
+\section{Mandelstam variables and scattering angle}
+\textbf{a)} The Mandelstam varbiales are as follows:
+\begin{align}
+    s &= \left( p_1 + p_2 \right) ^2 = \left( p_3 + p_4 \right) ^2 \\
+    t &= \left( p_1 - p_3 \right) ^2 = \left( p_2 - p_4 \right) ^2 \\
+    u &= \left( p_1 - p_4 \right) ^2 = \left( p_2 - p_3 \right) ^2 
+\end{align}
+\textbf{b)} The square of a particle's four momentum is its mass (\(p_i^2 = m_i\)), and momentum
+has to be conserved ( \( p_1 +p_2 = p_3 + p_4 \)). Therefore
+\begin{align}
+\nonumber s+t+u &= p_1^2+p_2^2+2p_1p_2 + p_1^2+p_3^2-2p_1p_3+p_1^2+p_4^2-2p_1p_4 \\
+\nonumber&= m_1^2+m_2^2+m_3^2+m_4^2+2p_1^2+2p_1p_2-2p_1p_3-2p_1p_4 \\
+\nonumber&= m_1^2+m_2^2+m_3^2+m_4^2+\underbrace{2p_1(p_1+p_2-p_3-p_4)}_{=0}\\
+&= m_1^2+m_2^2+m_3^2+m_4^2
+\end{align}
+
+\end{document}
